@@ -22,13 +22,13 @@ class User(object):
 
     def get_average_rating(self):
         books_count = 0
-        rtg_summ = 0
-        for rtg in self.books.values():
-            if rtg:
+        rating_sum = 0
+        for rating in self.books.values():
+            if rating:
                 books_count += 1
-                rtg_summ += rtg
-                avgrtg = rtg_summ / books_count
-        return avgrtg
+                rating_sum += rating
+                avg_rating = rating_sum / books_count
+        return avg_rating
 
     def read_book(self, book, rating=None):
         self.books[book] = rating
@@ -69,14 +69,14 @@ class Book(object):
         return self.title
 
     def get_average_rating(self):
-        rtg_summ = 0
-        for rtg in self.ratings:
-            rtg_summ += rtg
+        rating_sum = 0
+        for rating in self.ratings:
+            rating_sum += rating
         if len(self.ratings) > 0:
-            avg_rtg = rtg_summ / len(self.ratings)
+            avg_rating = rating_sum / len(self.ratings)
         else:
-            avg_rtg = 0
-        return avg_rtg
+            avg_rating = 0
+        return avg_rating
 
 
 class Fiction(Book):
@@ -180,9 +180,9 @@ class TomeRater(object):
         highest_rating = 0
         most_rated_book = None
         for book in self.books:
-            bookavgrtg = book.get_average_rating()
-            if bookavgrtg > highest_rating:
-                highest_rating = bookavgrtg
+            book_avgrating = book.get_average_rating()
+            if book_avgrating > highest_rating:
+                highest_rating = book_avgrating
                 most_rated_book = book
             return most_rated_book
 
@@ -190,8 +190,8 @@ class TomeRater(object):
         high_rating = 0
         positive_user = None
         for user in self.users.values():
-            useravgrtg = user.get_average_rating()
-            if useravgrtg > high_rating:
-                high_rating = useravgrtg
+            user_avgrating = user.get_average_rating()
+            if user_avgrating > high_rating:
+                high_rating = user_avgrating
                 positive_user = user
         return positive_user
